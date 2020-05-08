@@ -143,6 +143,7 @@ if __name__ == '__main__':
     ax.tick_params(axis='x', which='minor')
     ax.set_xticks(major_ticks)
     ax.set_xticks(minor_ticks, minor=True)
+    plt.tight_layout()
     plt.show()
 
 
