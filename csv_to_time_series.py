@@ -5,6 +5,8 @@ Convert csv file to a data frame then plot.
 Package Requirements
 ------------
     Pandas
+    Numpy
+    Matplotlib
 
 """
 
