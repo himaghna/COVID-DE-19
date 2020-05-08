@@ -18,13 +18,9 @@ import pandas as pd
 
 
 # PATHS
-us_csv = 'us.csv'
-counties_csv = 'us-counties.csv'
-states_csv = 'us-states.csv'
-
-
-counties_df = pd.read_csv(counties_csv)
-
+US_CSV = 'us.csv'
+CT_CSV = 'us-counties.csv'
+ST_CSV = 'us-states.csv'
 
 def format_labels(dates_):
     """Format date to human readable form
@@ -108,14 +104,21 @@ def get_time_series(df, state):
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('location', help='[us, md, de, nj, ny]')
+    parser.add_argument(
+        '-cf',
+        '--csv_file',
+        required=False,
+        default=None,
+        help='CSV filepath. If none supplied, hard-coded defaults are used')
     args = parser.parse_args()
     location = args.location
     if location not in ['us', 'md', 'nj', 'ny', 'de']:
         raise NotImplemented('Unknown location entered')
-    if location == 'us':
-        df = pd.read_csv(us_csv)
+    elif location == 'us':
+        csv_fpath = args.csv_file if args.csv_file is not None else US_CSV
     else:
-        df = pd.read_csv(states_csv)
+        csv_fpath = args.csv_file if args.csv_file is not None else ST_CSV
+    df = pd.read_csv(csv_fpath)
     cases, deaths, dates = get_time_series(df, state=location)
     deaths_in_thousands = np.array([int(int(death)/1000) for death in deaths])
     cases_in_thousands = np.array([int(int(case)/1000) for case in cases])
