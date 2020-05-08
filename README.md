@@ -8,4 +8,8 @@ Code to analyse time series data in COVID-19 around Delaware
    -------------------------
    state ['us', 'de', 'ny', 'nj', 'md']
    
-   Sample call: csv_to_time_series.py md
+   -cf, --csv_file: Optional location of csv file. If none supplied, this is taken from hard-coded presets.
+   
+   Sample calls: 
+   csv_to_time_series.py md
+   python csv_to_time_series.py md -cf us-states.csv
